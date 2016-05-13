@@ -7,32 +7,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
-
-    private String names[] = {
-            "Justin",
-            "Beiber",
-            "Believer",
-            "Justt",
-            "Beliep"
-    };
-
-    private String desc[] = {
-            "Singer",
-            "Singgg",
-            "Rock",
-            "Pianist",
-            "Do nothing"
-    };
-
-
-    private Integer imageid[] = {
-            R.drawable.bieber1,
-            R.drawable.bieber2,
-            R.drawable.bieber3,
-            R.drawable.bieber4,
-            R.drawable.bieber5
-    };
 
     private ListView listView;
     @Override
@@ -40,7 +17,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CustomList customList = new CustomList(this, names, desc, imageid);
+        ArrayList<Celebrity> arrayList = new ArrayList<Celebrity>();
+        arrayList.add(new Celebrity("justin","Singer",R.drawable.bieber1));
+        arrayList.add(new Celebrity("Bieber","Sing",R.drawable.bieber2));
+        arrayList.add(new Celebrity("Believer","Rock",R.drawable.bieber3));
+        arrayList.add(new Celebrity("Just","Pianist",R.drawable.bieber4));
+        arrayList.add(new Celebrity("Beliep","Nothing",R.drawable.bieber5));
+
+        CustomList customList = new CustomList(this, arrayList);
 
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(customList);
@@ -48,7 +32,9 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(),"You Clicked "+names[i],Toast.LENGTH_SHORT).show();
+
+               ArrayList<Celebrity> arrayList = (ArrayList<Celebrity>) listView.getItemAtPosition(i);
+                Toast.makeText(getApplicationContext(),"You Clicked "+arrayList.get(i).getName(),Toast.LENGTH_SHORT).show();
             }
         });
     }

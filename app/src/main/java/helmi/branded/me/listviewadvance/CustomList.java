@@ -8,22 +8,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by HelmiHasan on 13/05/2016.
  */
-public class CustomList extends ArrayAdapter<String> {
-    private String[] names;
-    private String[] desc;
-    private Integer[] imageid;
+public class CustomList extends ArrayAdapter<Celebrity> {
+    private ArrayList<Celebrity>arrayList;
+
     private Activity context;
 
-    public CustomList(Activity context, String[] names, String[] desc, Integer[] imageid) {
-        super(context, R.layout.list_layout, names);
-        this.context = context;
-        this.names = names;
-        this.desc = desc;
-        this.imageid = imageid;
 
+    public CustomList(Activity context, ArrayList<Celebrity> arrayList) {
+        super(context, R.layout.list_layout, arrayList);
+
+        this.context = context;
+        this.arrayList = arrayList;
     }
 
     @Override
@@ -34,9 +34,9 @@ public class CustomList extends ArrayAdapter<String> {
         TextView textViewDesc = (TextView) listViewItem.findViewById(R.id.textViewJob);
         ImageView image = (ImageView) listViewItem.findViewById(R.id.imageView);
 
-        textViewName.setText(names[position]);
-        textViewDesc.setText(desc[position]);
-        image.setImageResource(imageid[position]);
+        textViewName.setText(arrayList.get(position).getName());
+        textViewDesc.setText(arrayList.get(position).getJob());
+        image.setImageResource(arrayList.get(position).getImage());
         return  listViewItem;
     }
 }
