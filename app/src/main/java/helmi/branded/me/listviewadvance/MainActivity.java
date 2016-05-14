@@ -1,5 +1,6 @@
 package helmi.branded.me.listviewadvance;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ArrayList<Celebrity> arrayList = new ArrayList<Celebrity>();
+        ArrayList<Celebrity> arrayList = new ArrayList<>();
         arrayList.add(new Celebrity("justin","Singer",R.drawable.bieber1));
         arrayList.add(new Celebrity("Bieber","Sing",R.drawable.bieber2));
         arrayList.add(new Celebrity("Believer","Rock",R.drawable.bieber3));
@@ -33,8 +34,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-               ArrayList<Celebrity> arrayList = (ArrayList<Celebrity>) listView.getItemAtPosition(i);
-                Toast.makeText(getApplicationContext(),"You Clicked "+arrayList.get(i).getName(),Toast.LENGTH_SHORT).show();
+              Celebrity celebrity = (Celebrity) listView.getItemAtPosition(i);
+//                Toast.makeText(getApplicationContext(),"You Clicked "+arrayList.get(i).getName(),Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(MainActivity.this
+                        ,CelebrityDetailActivity.class);
+                intent.putExtra("name", celebrity.getName());
+                intent.putExtra("job", celebrity.getJob());
+                intent.putExtra("image", celebrity.getImage());
+                startActivity(intent);
             }
         });
     }
