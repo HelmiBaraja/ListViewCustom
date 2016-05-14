@@ -55,4 +55,10 @@ public class CelebrityDetailActivity extends AppCompatActivity {
         i.setData(Uri.parse(url));
         startActivity(i);
     }
+
+    public void buttonFacebook(View view)
+    {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/426253597411506"));
+        startActivity(intent);
+    }
 }
